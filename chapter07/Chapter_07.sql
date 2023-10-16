@@ -138,3 +138,31 @@ ALTER TABLE not_null_example ALTER COLUMN first_name DROP NOT NULL;
 
 -- Add
 ALTER TABLE not_null_example ALTER COLUMN first_name SET NOT NULL;
+
+--listing 7.11(importing data)
+CREATE TABLE new_york_addresses (
+    longitude numeric(9,6),
+    latitude numeric(9,6),
+    street_number varchar(10),
+    street varchar(32),
+    unit varchar(7),
+    postcode varchar(5),
+    id integer CONSTRAINT new_york_key PRIMARY KEY
+);
+
+COPY new_york_addresses
+FROM 'C:\YourDirectory\city_of_new_york.csv'
+WITH (FORMAT CSV, HEADER);
+
+--listing 7.12(queries for index performance)
+EXPLAIN ANALYZE SELECT * FROM new_york_addresses
+WHERE street = 'BROADWAY';
+
+EXPLAIN ANALYZE SELECT * FROM new_york_addresses
+WHERE street = '52 STREET';
+
+EXPLAIN ANALYZE SELECT * FROM new_york_addresses
+WHERE street = 'ZWICKY AVENUE';
+
+--listing 7.13
+CREATE INDEX street_idx ON new_york_addresses (street);
