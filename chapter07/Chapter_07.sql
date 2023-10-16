@@ -117,3 +117,24 @@ VALUES ('Betty', 'Diaz', 'bdiaz@example.org');
 
 INSERT INTO unique_constraint_example (first_name, last_name, email)
 VALUES ('Sasha', 'Lee', 'slee@example.org');
+
+--listing 7.9(NOT NULL)
+CREATE TABLE not_null_example (
+    student_id bigserial,
+    first_name varchar(50) NOT NULL,
+    last_name varchar(50) NOT NULL,
+    CONSTRAINT student_id_key PRIMARY KEY (student_id)
+);
+
+--listing 7.10(dropping + adding primary key constraints + not null)
+-- Drop
+ALTER TABLE not_null_example DROP CONSTRAINT student_id_key;
+
+-- Add
+ALTER TABLE not_null_example ADD CONSTRAINT student_id_key PRIMARY KEY (student_id);
+
+-- Drop
+ALTER TABLE not_null_example ALTER COLUMN first_name DROP NOT NULL;
+
+-- Add
+ALTER TABLE not_null_example ALTER COLUMN first_name SET NOT NULL;
