@@ -154,7 +154,7 @@ COPY new_york_addresses
 FROM 'C:\YourDirectory\city_of_new_york.csv'
 WITH (FORMAT CSV, HEADER);
 
---listing 7.12(queries for index performance)
+--listing 7.12(benchmark queries for index performance)
 EXPLAIN ANALYZE SELECT * FROM new_york_addresses
 WHERE street = 'BROADWAY';
 
