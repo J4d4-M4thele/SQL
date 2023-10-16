@@ -91,3 +91,10 @@ CREATE TABLE check_constraint_example (
     CONSTRAINT check_role_in_list CHECK (user_role IN('Admin', 'Staff')),
     CONSTRAINT check_salary_not_zero CHECK (salary > 0)
 );
+
+--listing 7.8(both have failed)
+INSERT INTO check_constraint_example (user_role)
+VALUES ('admin');
+
+INSERT INTO check_constraint_example (salary)
+VALUES (0);
