@@ -82,7 +82,7 @@ VALUES ('A203391', '3/17/2017', 'T229901');
 INSERT INTO registrations (registration_id, registration_date, license_id)
 VALUES ('A75772', '3/17/2017', 'T000001'); 
 
---listing 7.7()
+--listing 7.7(constraint example)
 CREATE TABLE check_constraint_example (
     user_id bigserial,
     user_role varchar(50),
