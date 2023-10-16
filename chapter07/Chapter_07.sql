@@ -77,10 +77,10 @@ INSERT INTO licenses (license_id, first_name, last_name)
 VALUES ('T229901', 'Lynn', 'Malero');
 
 INSERT INTO registrations (registration_id, registration_date, license_id)
-VALUES ('A203391', '3/17/2017', 'T229901');
+VALUES ('A203391', '2017/03/17', 'T229901');
 
 INSERT INTO registrations (registration_id, registration_date, license_id)
-VALUES ('A75772', '3/17/2017', 'T000001'); 
+VALUES ('A75772', '2017/03/17', 'T000001'); 
 
 --listing 7.7(constraint example)
 CREATE TABLE check_constraint_example (
