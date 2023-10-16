@@ -167,5 +167,5 @@ WHERE street = '52 STREET';
 EXPLAIN ANALYZE SELECT * FROM new_york_addresses
 WHERE street = 'ZWICKY AVENUE';
 
---listing 7.13
+--listing 7.13(creating an index)
 CREATE INDEX street_idx ON new_york_addresses (street);
