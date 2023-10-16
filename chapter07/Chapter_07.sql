@@ -157,6 +157,7 @@ WITH (FORMAT CSV, HEADER);
 --listing 7.12(benchmark queries for index performance)
 --explain and analyze commands show how queries are 
 --executed
+--indexes increase query execution speed
 EXPLAIN ANALYZE SELECT * FROM new_york_addresses
 WHERE street = 'BROADWAY';
 
