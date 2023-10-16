@@ -33,3 +33,12 @@ CREATE TABLE natural_key_composite_example (
     CONSTRAINT student_key PRIMARY KEY (student_id, school_day)
 );
 
+-- Listing 7-4 (Example of a composite primary key violation)
+INSERT INTO natural_key_composite_example (student_id, school_day, present)
+VALUES(775, '1/22/2017', 'Y');
+
+INSERT INTO natural_key_composite_example (student_id, school_day, present)
+VALUES(775, '1/23/2017', 'Y');
+
+INSERT INTO natural_key_composite_example (student_id, school_day, present)
+VALUES(775, '1/23/2017', 'N');
