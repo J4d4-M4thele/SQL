@@ -1,0 +1,21 @@
+geo_name|state_us_abbreviation|housing_unit_count_100_percent
+Los Angeles County|CA|3445076
+Los Angeles County|CA|3445076
+Los Angeles County|CA|3445076
+Los Angeles County|CA|3445076
+Los Angeles County|CA|3445076
+Cook County|IL|2180359
+Cook County|IL|2180359
+Cook County|IL|2180359
+Cook County|IL|2180359
+Cook County|IL|2180359
+Maricopa County|AZ|1639279
+Maricopa County|AZ|1639279
+Maricopa County|AZ|1639279
+Maricopa County|AZ|1639279
+Maricopa County|AZ|1639279
+Harris County|TX|1598698
+Harris County|TX|1598698
+Harris County|TX|1598698
+Harris County|TX|1598698
+Harris County|TX|1598698
