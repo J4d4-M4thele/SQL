@@ -33,7 +33,7 @@ CREATE TABLE natural_key_composite_example (
     CONSTRAINT student_key PRIMARY KEY (student_id, school_day)
 );
 
--- Listing 7-4 (Example of a composite primary key violation)
+-- Listing 7.4 (Example of a composite primary key violation)
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
 VALUES(775, '1/22/2017', 'Y');
 
@@ -42,3 +42,18 @@ VALUES(775, '1/23/2017', 'Y');
 
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
 VALUES(775, '1/23/2017', 'N');
+
+--listing 7.5 (declaring big column as surrogate key)
+CREATE TABLE surrogate_key_example (
+    order_number bigserial,
+    product_name varchar(50),
+    order_date date,
+    CONSTRAINT order_key PRIMARY KEY (order_number)
+);
+
+INSERT INTO surrogate_key_example (product_name, order_date)
+VALUES ('Beachball Polish', '2015-03-17'),
+       ('Wrinkle De-Atomizer', '2017-05-22'),
+       ('Flux Capacitor', '1985-10-26');
+
+SELECT * FROM surrogate_key_example;
