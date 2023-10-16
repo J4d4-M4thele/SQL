@@ -128,7 +128,7 @@ WITHIN GROUP (ORDER BY p0010001)
 FROM us_counties_2010;
 
 --listing 5.14(creating median function)
-CREATE OR REPLACE FUNCTION _final_median(anyarray)
+CREATE OR REPLACE FUNCTION _final_median(numeric[])
 RETURNS float8 AS
 $$
 WITH q AS
@@ -151,6 +151,9 @@ OFFSET GREATEST(CEIL((SELECT c FROM cnt) / 2.0) - 1,0)
 ) q2;
 $$
 LANGUAGE sql IMMUTABLE;
+
+--drop to replace function
+DROP FUNCTION _final_median();
 
 CREATE AGGREGATE median(anyelement) (
 SFUNC=array_append,
