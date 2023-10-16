@@ -58,7 +58,7 @@ VALUES ('Beachball Polish', '2015-03-17'),
 
 SELECT * FROM surrogate_key_example;
 
---listing 7.6()
+--listing 7.6(foreign key)
 CREATE TABLE licenses (
     license_id varchar(10),
     first_name varchar(50),
@@ -81,3 +81,13 @@ VALUES ('A203391', '3/17/2017', 'T229901');
 
 INSERT INTO registrations (registration_id, registration_date, license_id)
 VALUES ('A75772', '3/17/2017', 'T000001'); 
+
+--listing 7.7()
+CREATE TABLE check_constraint_example (
+    user_id bigserial,
+    user_role varchar(50),
+    salary integer,
+    CONSTRAINT user_id_key PRIMARY KEY (user_id),
+    CONSTRAINT check_role_in_list CHECK (user_role IN('Admin', 'Staff')),
+    CONSTRAINT check_salary_not_zero CHECK (salary > 0)
+);
