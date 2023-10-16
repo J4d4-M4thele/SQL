@@ -35,13 +35,13 @@ CREATE TABLE natural_key_composite_example (
 
 -- Listing 7.4 (Example of a composite primary key violation)
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
-VALUES(775, '1/22/2017', 'Y');
+VALUES(775, '2017/01/22', 'Y');
 
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
-VALUES(775, '1/23/2017', 'Y');
+VALUES(775, '2017/01/23', 'Y');
 
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
-VALUES(775, '1/23/2017', 'N');
+VALUES(775, '2017/01/23', 'N');
 
 --listing 7.5 (declaring big column as surrogate key)
 CREATE TABLE surrogate_key_example (
