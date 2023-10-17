@@ -30,7 +30,7 @@ COPY (
     ON pls14.fscskey = pls09.fscskey
     GROUP BY pls14.stabr
 )
-TO 'C:\YourDirectory\region_2014.csv'
+TO 'C:\YourDirectory\region_2014.txt'
 WITH (FORMAT CSV, HEADER);
 
 --Question 3
