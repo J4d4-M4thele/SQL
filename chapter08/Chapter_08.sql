@@ -70,3 +70,27 @@ FROM pls_fy2014_pupld14a;
 --listing 8.6(using min() and max() functions)
 SELECT max(visits), min(visits)
 FROM pls_fy2014_pupld14a;
+
+--listing 8.7(using GROUP BY clause)
+SELECT stabr
+FROM pls_fy2014_pupld14a
+GROUP BY stabr
+ORDER BY stabr;
+
+--listing 8.8(Using GROUP BY on two columns)
+SELECT city, stabr
+FROM pls_fy2014_pupld14a
+GROUP BY city, stabr
+ORDER BY city, stabr;
+
+--listing 8.9(Using GROUP BY with count() on the stabr column)
+SELECT stabr, count(*)
+FROM pls_fy2014_pupld14a
+GROUP BY stabr
+ORDER BY count(*) DESC;
+
+--listing 8.10(using GROUP BY with count())
+SELECT stabr, stataddr, count(*)
+FROM pls_fy2014_pupld14a
+GROUP BY stabr, stataddr
+ORDER BY stabr ASC, count(*) DESC;
