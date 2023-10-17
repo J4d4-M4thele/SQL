@@ -1,0 +1,22 @@
+--Question 1
+--use per year, per state
+--Q1
+SELECT pls14.stabr, 
+sum(pls14.gpterms) AS num_comps_2014,
+sum(pls09.gpterms) AS num_comps_2009,
+round( sum(pls14.gpterms) - sum(pls09.gpterms) /
+sum(pls09.gpterms) * 100, 2 ) AS pct_change_comp,
+sum(pls14.pitusr) AS use_per_year_2014,
+sum(pls09.pitusr) AS use_per_year_2009,
+sum(pls14.pitusr) - sum(pls09.pitusr)  AS raw_change_usage
+FROM pls_fy2014_pupld14a pls14 JOIN pls_fy2009_pupld09a pls09
+ON pls14.fscskey = pls09.fscskey
+WHERE pls14.gpterms >= 0 AND pls09.gpterms >= 0
+GROUP BY pls14.stabr
+ORDER BY pct_change_comp DESC;
+'
+Use of computers in libraries have increased per state over the last 5 years, however
+the amount of people using the computers has decreased.
+'
+
+--Question 2

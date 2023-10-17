@@ -221,6 +221,7 @@ FROM pls_fy2009_pupld09a
 WHERE visits >= 0;
 
 --listing 8.12(using sum() to total visits for both tables)
+--there were more visits in 2009 than 2014 overall
 SELECT sum(pls14.visits) AS visits_2014,
 sum(pls09.visits) AS visits_2009
 FROM pls_fy2014_pupld14a pls14 JOIN pls_fy2009_pupld09a pls09
@@ -239,7 +240,9 @@ WHERE pls14.visits >= 0 AND pls09.visits >= 0
 GROUP BY pls14.stabr
 ORDER BY pct_change DESC;
 
---listing 8.14
+--listing 8.14(HAVING clause is like WHERE for aggregates)
+--% change per state 
+--add visits greater than 50 million
 SELECT pls14.stabr,
 sum(pls14.visits) AS visits_2014,
 sum(pls09.visits) AS visits_2009,
