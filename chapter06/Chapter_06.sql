@@ -165,8 +165,8 @@ p0020003 integer
 COPY us_counties_2000
 FROM 'C:\YourDirectory\us_counties_2000.csv'
 WITH (FORMAT CSV, HEADER);
-SELECT c2010.geo_name,
 
+SELECT c2010.geo_name,
 c2010.state_us_abbreviation AS state,
 c2010.p0010001 AS pop_2010,
 c2000.p0010001 AS pop_2000,
