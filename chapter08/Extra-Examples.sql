@@ -1,6 +1,4 @@
 --Question 1
---use per year, per state
---Q1
 SELECT pls14.stabr, 
 sum(pls14.gpterms) AS num_comps_2014,
 sum(pls09.gpterms) AS num_comps_2009,
@@ -20,3 +18,27 @@ the amount of people using the computers has decreased.
 '
 
 --Question 2
+CREATE TABLE region (
+  stabr varchar(2) NOT NULL,
+  obereg integer CONSTRAINT code_key PRIMARY KEY
+);
+
+COPY (
+    SELECT pls14.stabr, 
+    DISTINCT pls14.obereg AS code
+    FROM pls_fy2014_pupld14a pls14 JOIN pls_fy2009_pupld09a pls09
+    ON pls14.fscskey = pls09.fscskey
+    GROUP BY pls14.stabr
+)
+TO 'C:\YourDirectory\region_2014.csv'
+WITH (FORMAT CSV, HEADER);
+
+--Question 3
+'
+A cross join as it shows every possible combination
+of rows, matching or not
+'
+SELECT * 
+FROM pls_fy2014_pupld14a pls14 CROSS JOIN pls_fy2009_pupld09a pls09
+WHERE pls14.fscskey IS NULL
+ OR pls09.fscskey IS NULL;
