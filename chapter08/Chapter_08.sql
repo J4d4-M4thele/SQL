@@ -59,4 +59,14 @@ FROM pls_fy2009_pupld09a;
 SELECT count(salaries)
 FROM pls_fy2014_pupld14a;
 
---listing 8.5
+--listing 8.5(count() for distinct values)
+--distinct returns a set of unique values
+SELECT count(libname)
+FROM pls_fy2014_pupld14a;
+
+SELECT count(DISTINCT libname)
+FROM pls_fy2014_pupld14a;
+
+--listing 8.6(using min() and max() functions)
+SELECT max(visits), min(visits)
+FROM pls_fy2014_pupld14a;
