@@ -24,11 +24,11 @@ CREATE TABLE region (
 );
 
 COPY (
-    SELECT pls14.stabr, 
-    DISTINCT pls14.obereg AS code
-    FROM pls_fy2014_pupld14a pls14 JOIN pls_fy2009_pupld09a pls09
-    ON pls14.fscskey = pls09.fscskey
-    GROUP BY pls14.stabr
+  SELECT pls14.stabr
+  FROM pls_fy2014_pupld14a pls14 JOIN pls_fy2009_pupld09a pls09
+  ON pls14.obereg = pls09.obereg
+  GROUP BY pls14.stabr, pls14.obereg
+  ORDER BY pls14.stabr ASC, pls14.obereg ASC
 )
 TO 'C:\YourDirectory\region_2014.txt'
 WITH (FORMAT CSV, HEADER);
