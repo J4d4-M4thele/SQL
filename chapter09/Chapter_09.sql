@@ -95,9 +95,12 @@ FROM meat_poultry_egg_inspect
 ORDER BY st;
 
 -- Listing 9.11: Updating the st column for three establishments
-
+--fixes listing 9.4's problem(missing values)
 UPDATE meat_poultry_egg_inspect
 SET st = 'MN'
+
+--to see the record specifically
+SELECT * FROM meat_poultry_egg_inspect
 WHERE est_number = 'V18677A';
 
 UPDATE meat_poultry_egg_inspect
@@ -129,6 +132,10 @@ SET company_standard = company;
 
 -- Listing 9.14: Use UPDATE to modify field values that match a string
 
+--do before running an update to test data
+--SELECT company, company_standard FROM meat_poultry_egg_inspect
+--WHERE company LIKE 'Armour%';
+
 UPDATE meat_poultry_egg_inspect
 SET company_standard = 'Armour-Eckrich Meats'
 WHERE company LIKE 'Armour%';
@@ -144,16 +151,21 @@ ALTER TABLE meat_poultry_egg_inspect ADD COLUMN zip_copy varchar(5);
 UPDATE meat_poultry_egg_inspect
 SET zip_copy = zip;
 
+--SELECT company FROM meat_poultry_egg_inspect
+
 -- Listing 9.16: Modify codes in the zip column missing two leading zeros
 
 UPDATE meat_poultry_egg_inspect
 SET zip = '00' || zip
+
+--SELECT * FROM meat_poultry_egg_inspect (test values befor updating)
 WHERE st IN('PR','VI') AND length(zip) = 3;
 
 -- Listing 9.17: Modify codes in the zip column missing one leading zero
 
 UPDATE meat_poultry_egg_inspect
 SET zip = '0' || zip
+--SELECT * FROM meat_poultry_egg_inspect (test values befor updating)
 WHERE st IN('CT','MA','ME','NH','NJ','RI','VT') AND length(zip) = 4;
 
 -- Listing 9.18: Creating and filling a state_regions table
@@ -188,6 +200,7 @@ ORDER BY st;
 -- Listing 9.21: Delete rows matching an expression
 
 DELETE FROM meat_poultry_egg_inspect
+--SELECT * FROM meat_poultry_egg_inspect (test values befor updating)
 WHERE st IN('PR','VI');
 
 -- Listing 9.22: Remove a column from a table using DROP
@@ -199,7 +212,7 @@ ALTER TABLE meat_poultry_egg_inspect DROP COLUMN zip_copy;
 DROP TABLE meat_poultry_egg_inspect_backup;
 
 -- Listing 9.24: Demonstrating a transaction block
-
+--do all statements together or not at all
 -- Start transaction and perform update
 START TRANSACTION;
 
