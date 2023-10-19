@@ -18,11 +18,11 @@ SELECT extract('year' from '2019-12-01 18:37:12 EST'::timestamptz) AS "year";
 
 -- Listing 11-2: Three functions for making datetimes from components
 
--- make a date
+-- make a date (year, month, day)
 SELECT make_date(2018, 2, 22);
--- make a time
+-- make a time (hour, minute, seconds)
 SELECT make_time(18, 4, 30.3);
--- make a timestamp with time zone
+-- make a timestamp with time zone (year, month, day, hour, minute, second, time zone)
 SELECT make_timestamptz(2018, 2, 22, 18, 4, 30.3, 'Europe/Lisbon');
 
 -- Bonus: Retrieving the current date and time
@@ -50,7 +50,7 @@ INSERT INTO current_time_example (current_timestamp_col, clock_timestamp_col)
 
 SELECT * FROM current_time_example;
 
--- Time Zones
+-- ***TIME ZONES***
 
 -- Listing 11-4: Showing your PostgreSQL server's default time zone
 
@@ -81,7 +81,7 @@ SET timezone TO 'US/Eastern';
 
 SELECT test_date
 FROM time_zone_test;
-
+--shows time_zone_test in Korean Standard Time
 SELECT test_date AT TIME ZONE 'Asia/Seoul'
 FROM time_zone_test;
 
@@ -176,6 +176,7 @@ SELECT
     date_part('hour', tpep_pickup_datetime) AS trip_hour,
     percentile_cont(.5)
         WITHIN GROUP (ORDER BY
+        --dropoff - pickup = duration
             tpep_dropoff_datetime - tpep_pickup_datetime) AS median_trip
 FROM nyc_yellow_taxi_trips_2016_06_01
 GROUP BY trip_hour
@@ -207,18 +208,20 @@ SELECT * FROM train_rides;
 
 SELECT segment,
        to_char(departure, 'YYYY-MM-DD HH12:MI a.m. TZ') AS departure,
+       --arrival - departure = duration
        arrival - departure AS segment_time
 FROM train_rides;
 
 -- Listing 11-13: Calculating cumulative intervals using OVER
-
+--sum of segment time over order by trip_id
 SELECT segment,
        arrival - departure AS segment_time,
        sum(arrival - departure) OVER (ORDER BY trip_id) AS cume_time
 FROM train_rides;
 
 -- Listing 11-14: Better formatting for cumulative trip time
-
+--epoch setting extracts no. of seconds between
+--arrival and departure intervals
 SELECT segment,
        arrival - departure AS segment_time,
        sum(date_part('epoch', (arrival - departure)))
