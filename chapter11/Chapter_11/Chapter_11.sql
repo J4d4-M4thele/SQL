@@ -1,10 +1,3 @@
---------------------------------------------------------------
--- Practical SQL: A Beginner's Guide to Storytelling with Data
--- by Anthony DeBarros
-
--- Chapter 11 Code Examples
---------------------------------------------------------------
-
 -- Listing 11-1: Extracting components of a timestamp value using date_part()
 
 SELECT
