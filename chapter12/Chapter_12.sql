@@ -25,10 +25,11 @@ SELECT count(*) FROM us_counties_2010_top10;
 
 -- Listing 12-3: Subquery as a derived table in a FROM clause
 
+--calculating average
 SELECT round(calcs.average, 0) as average,
        calcs.median,
        round(calcs.average - calcs.median, 0) AS median_average_diff
-FROM (
+FROM (--calculating median
      SELECT avg(p0010001) AS average,
             percentile_cont(.5)
                 WITHIN GROUP (ORDER BY p0010001)::numeric(10,1) AS median
@@ -44,7 +45,7 @@ SELECT census.state_us_abbreviation AS st,
        round((plants.plant_count/census.st_population::numeric(10,1)) * 1000000, 1)
            AS plants_per_million
 FROM
-    (
+    (--calculates plants per state
          SELECT st,
                 count(*) AS plant_count
          FROM meat_poultry_egg_inspect
@@ -52,7 +53,7 @@ FROM
     )
     AS plants
 JOIN
-    (
+    (--calculates population per state
         SELECT state_us_abbreviation,
                sum(p0010001) AS st_population
         FROM us_counties_2010
@@ -117,6 +118,7 @@ FROM employees
 WHERE EXISTS (
     SELECT id
     FROM retirees);
+    --returns data if true, is empty if false.
 
 -- Using a correlated subquery to find matching values from employees
 -- in retirees.
@@ -127,18 +129,27 @@ WHERE EXISTS (
     FROM retirees
     WHERE id = employees.emp_id);
 
+ --used to assess whether data is complete
+SELECT first_name, last_name
+FROM employees
+WHERE NOT EXISTS (
+SELECT id
+FROM retirees
+WHERE id = employees.emp_id);                  
                    
-                   
--- Listing 12-7: Using a simple CTE to find large counties
+-- Listing 12-7: Using a simple CTE(Common Table Expressions) to find large counties
 
 WITH
+--name of table and rows
     large_counties (geo_name, st, p0010001)
 AS
+--subquery to select data to populate temp table with 
     (
         SELECT geo_name, state_us_abbreviation, p0010001
         FROM us_counties_2010
         WHERE p0010001 >= 100000
     )
+    --main query for the display
 SELECT st, count(*)
 FROM large_counties
 GROUP BY st
@@ -154,16 +165,17 @@ ORDER BY count(*) DESC;
 -- Listing 12-8: Using CTEs in a table join
 
 WITH
+--temp table 1
     counties (st, population) AS
     (SELECT state_us_abbreviation, sum(population_count_100_percent)
      FROM us_counties_2010
      GROUP BY state_us_abbreviation),
-
+--temp table 2
     plants (st, plants) AS
     (SELECT st, count(*) AS plants
      FROM meat_poultry_egg_inspect
      GROUP BY st)
-
+--main query
 SELECT counties.st,
        population,
        plants,
@@ -226,6 +238,9 @@ AS (office varchar(20),
     strawberry bigint,
     vanilla bigint);
 
+SELECT *
+FROM ice_cream_survey
+LIMIT 5;
 -- Listing 12-12: Creating and filling a temperature_readings table
 
 CREATE TABLE temperature_readings (
