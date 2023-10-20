@@ -46,6 +46,7 @@ CREATE TABLE current_time_example (
 INSERT INTO current_time_example (current_timestamp_col, clock_timestamp_col)
     (SELECT current_timestamp,
             clock_timestamp()
+            --returns a set of integers within range given
      FROM generate_series(1,1000));
 
 SELECT * FROM current_time_example;
@@ -85,6 +86,8 @@ FROM time_zone_test;
 SELECT test_date AT TIME ZONE 'Asia/Seoul'
 FROM time_zone_test;
 
+--SET timezone TO 'Africa/Johannesburg';
+--to reverse changes
 
 -- Math with dates!
 
@@ -146,13 +149,16 @@ WITH (FORMAT CSV, HEADER, DELIMITER ',');
 CREATE INDEX tpep_pickup_idx
 ON nyc_yellow_taxi_trips_2016_06_01 (tpep_pickup_datetime);
 
+SET timezone TO 'US/Eastern';--for more accurate data(we're looking at NYC times)
+SHOW timezone;
+
 SELECT count(*) FROM nyc_yellow_taxi_trips_2016_06_01;
 
 -- Listing 11-8: Counting taxi trips by hour
 
 SELECT
     date_part('hour', tpep_pickup_datetime) AS trip_hour,
-    count(*)
+    count(*) --representative function
 FROM nyc_yellow_taxi_trips_2016_06_01
 GROUP BY trip_hour
 ORDER BY trip_hour;
