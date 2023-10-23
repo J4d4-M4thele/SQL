@@ -99,6 +99,8 @@ AS case_number
 FROM crime_reports;
 
 -- Listing 13.9: Updating the crime_reports date_1 column
+--adjust date style
+SET datestyle = 'ISO,MDY';
 
 UPDATE crime_reports
 SET date_1 = 
@@ -274,7 +276,7 @@ FROM president_speeches
 WHERE search_speech_text @@ to_tsquery('transportation & !roads');
 
 -- Listing 13.24: Find speeches where "defense" follows "military"
-
+--finding adjacent words
 SELECT president,
        speech_date,
        ts_headline(speech_text, to_tsquery('military <-> defense'),
@@ -299,7 +301,8 @@ FROM president_speeches
 WHERE search_speech_text @@ to_tsquery('military <2> defense');
 
 -- Listing 13.25: Scoring relevance with ts_rank()
-
+--ts_rank() generates rank value
+--ts_rank_cd considers how close lexemes are to each other
 SELECT president,
        speech_date,
        ts_rank(search_speech_text,
