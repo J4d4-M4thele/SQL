@@ -22,8 +22,14 @@ The temperature falls between 86 and 87 most often.
 '
 
 --Question 2
+--in a matrix rows are one variable
+--columns are another variable
 SELECT *
-FROM crosstab(
+FROM crosstab('SELECT flavor
+               FROM ice_cream_survey
+               GROUP BY flavor
+               ORDER BY flavor'
+    
                'SELECT office,
                       flavor,
                       count(*)
@@ -36,8 +42,4 @@ AS (office varchar(20),
     chocolate bigint,
     strawberry bigint,
     vanilla bigint
-);
-
-SELECT *
-FROM ice_cream_survey
-LIMIT 5;
+    );
