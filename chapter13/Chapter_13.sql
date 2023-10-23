@@ -232,7 +232,7 @@ WITH (FORMAT CSV, DELIMITER '|', HEADER OFF, QUOTE '@');
 SELECT * FROM president_speeches;
 
 -- Listing 13.19: Converting speeches to tsvector in the search_speech_text column
-
+--converts and changes data type @ same time
 UPDATE president_speeches
 SET search_speech_text = to_tsvector('english', speech_text);
 
@@ -248,7 +248,7 @@ WHERE search_speech_text @@ to_tsquery('Vietnam')
 ORDER BY speech_date;
 
 -- Listing 13.22: Displaying search results with ts_headline()
-
+--we can see where search terms display in our text
 SELECT president,
        speech_date,
        ts_headline(speech_text, to_tsquery('Vietnam'),
