@@ -18,3 +18,8 @@ FROM president_speeches
 WHERE search_speech_text @@ to_tsquery('war & security & threat & enemy')
 ORDER BY score DESC
 LIMIT 5;
+
+'
+ts_rank_cd does change the results quite drastically,
+The order and the score significantly changes.
+'
