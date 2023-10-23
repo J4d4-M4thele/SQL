@@ -198,8 +198,11 @@ SELECT array_length(regexp_split_to_array('Phil Mike Tony Steve', ' '), 1);
 -- ! (NOT)
 
 -- Listing 13.15: Converting text to tsvector data
-
+--reduces no. of words
+--only keeps helpful search terms
+--orders words alphabetically
 SELECT to_tsvector('I am walking across the sitting room to sit with you.');
+--returns words position(s)
 
 -- Listing 13.16: Converting search terms to tsquery data
 
