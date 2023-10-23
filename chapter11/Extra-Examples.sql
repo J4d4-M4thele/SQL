@@ -24,27 +24,20 @@ WHERE test_date = '2100-01-01 00:00 EDT';
 --Question 3
 CREATE TABLE nyc_yellow_taxi_trips_2016_06_01_temp AS SELECT * FROM nyc_yellow_taxi_trips_2016_06_01;
 
-ALTER TABLE nyc_yellow_taxi_trips_2016_06_01_temp ADD COLUMN segment_time timestamp with time zone NOT NULL;
+ALTER TABLE nyc_yellow_taxi_trips_2016_06_01_temp ADD COLUMN segment_time interval NOT NULL;
 
-UPDATE nyc_yellow_taxi_trips_2016_06_01_temp temp
-SET segment_time =  tpep_dropoff_datetime - tpep_pickup_datetime;
+UPDATE nyc_yellow_taxi_trips_2016_06_01_temp
+SET segment_time = tpep_dropoff_datetime - tpep_pickup_datetime;
 
+-- Calculate R-squared and slope for segment_time and total_amount
 SELECT 
-round(
-        regr_r2(segment_time, total_amount)::numeric, 2
-        ) AS r_squared,
-round(
-    regr_slope(segment_time, total_amount)::numeric, 2
-    ) AS slope
+    round(regr_r2(segment_time, total_amount)::numeric, 2) AS r_squared,
+    round(regr_slope(segment_time, total_amount)::numeric, 2) AS slope
 FROM nyc_yellow_taxi_trips_2016_06_01_temp
-WHERE segment_time <= '3 hours'
-AND segment_time > '0 minutes';
+WHERE segment_time <= interval '3 hours' AND segment_time > interval '0 minutes';
 
+-- Calculate R-squared and slope for trip_distance and total_amount
 SELECT 
-round(
-        regr_r2(trip_distance, total_amount)::numeric, 2
-        ) AS r_squared,
-round(
-    regr_slope(trip_distance, total_amount)::numeric, 2
-    ) AS slope
+    round(regr_r2(trip_distance, total_amount)::numeric, 2) AS r_squared,
+    round(regr_slope(trip_distance, total_amount)::numeric, 2) AS slope
 FROM nyc_yellow_taxi_trips_2016_06_01_temp;

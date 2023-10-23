@@ -103,9 +103,9 @@ FROM crime_reports;
 UPDATE crime_reports
 SET date_1 = 
 (
-    (regexp_match(original_text, '\d{1,2}\/\d{1,2}\/\d{2}'))[1]
+    (regexp_match(original_text, '\d{4}\/\d{1,2}\/\d{1,2}'))[1]
         || ' ' ||
-    (regexp_match(original_text, '\/\d{2}\n(\d{4})'))[1] 
+    (regexp_match(original_text, '\/\d{2}\n(\d{4})'))[1]      
         ||' US/Eastern'
 )::timestamptz;
 
