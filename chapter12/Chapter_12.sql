@@ -238,9 +238,9 @@ AS (office varchar(20),
     strawberry bigint,
     vanilla bigint);
 
-SELECT *
-FROM ice_cream_survey
-LIMIT 5;
+-- SELECT *
+-- FROM ice_cream_survey
+-- LIMIT 5;
 -- Listing 12-12: Creating and filling a temperature_readings table
 
 CREATE TABLE temperature_readings (
