@@ -13,6 +13,31 @@ WITH temps_collapsed (station_name, max_temperature_group) AS
 
 SELECT station_name, max_temperature_group, count(*)
 FROM temps_collapsed
-WHERE station_name = "WAIKIKI 717.2 HI US"
+WHERE station_name LIKE 'WAIKIKI%'
 GROUP BY station_name, max_temperature_group
-ORDER BY station_name, count(*) DESC;
+ORDER BY max_temperature_group DESC;
+
+'
+The temperature falls between 86 and 87 most often.
+'
+
+--Question 2
+SELECT *
+FROM crosstab(
+               'SELECT office,
+                      flavor,
+                      count(*)
+               FROM ice_cream_survey
+               GROUP BY office, flavor
+               ORDER BY office',
+)
+
+AS (office varchar(20),
+    chocolate bigint,
+    strawberry bigint,
+    vanilla bigint
+);
+
+SELECT *
+FROM ice_cream_survey
+LIMIT 5;
