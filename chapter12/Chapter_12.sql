@@ -140,7 +140,7 @@ WHERE id = employees.emp_id);
 -- Listing 12-7: Using a simple CTE(Common Table Expressions) to find large counties
 
 WITH
---name of table and rows
+--name of table and columns
     large_counties (geo_name, st, p0010001)
 AS
 --subquery to select data to populate temp table with 
