@@ -51,12 +51,16 @@ SELECT ST_MakePoint(-74.9233606, 42.699992);
 SELECT ST_SetSRID(ST_MakePoint(-74.9233606, 42.699992), 4326);
 
 -- Listing 14.7 (Functions specific to making LineStrings)
-
+--ST_LineFromText(WKT, SRID)
+--ST_GeomFromText()
+--ST_MakeLine(geom, geom)
 SELECT ST_LineFromText('LINESTRING(-105.90 35.67,-105.91 35.67)', 4326);
 SELECT ST_MakeLine(ST_MakePoint(-74.92, 42.69), ST_MakePoint(-74.12, 42.45));
 
 -- Listing 14.8 (Functions specific to making Polygons)
-
+--ST_PolygonFromText(WKT, SRID)
+--ST_MakePolygon(linestring)
+--ST_MPolyFromText(WKT, SRID)
 SELECT ST_PolygonFromText('POLYGON((-74.9 42.7, -75.1 42.7,
                                     -75.1 42.6, -74.9 42.7))', 4326);
 
