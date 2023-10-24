@@ -1,21 +1,21 @@
--- Listing 14-1: Creating a gis_analysis database
+-- Listing 14.1 (Creating a gis_analysis database)
 
 CREATE DATABASE gis_analysis;
 -- Note: Switch to this new database before continuing the examples
 
--- Listing 14-2: Loading the PostGIS extension
+-- Listing 14.2 (Loading the PostGIS extension)
 
 CREATE EXTENSION postgis;
 
 SELECT postgis_full_version(); -- shows PostGIS version
 
--- Listing 14-3: Retrieving the well-known text for SRID 4326
+-- Listing 14.3 (Retrieving the well-known text for SRID 4326)
 
 SELECT srtext
 FROM spatial_ref_sys
 WHERE srid = 4326;
 
--- Listing 14-4: Using ST_GeomFromText() to create spatial objects
+-- Listing 14.4 (Using ST_GeomFromText() to create spatial objects)
 
 SELECT ST_GeomFromText('POINT(-74.9233606 42.699992)', 4326);
 
@@ -37,24 +37,24 @@ SELECT ST_GeomFromText('MULTIPOLYGON((
                                       -74.98 42.64, -74.98 42.66,
                                       -75.0 42.66)))', 4326);
 
--- Listing 14-5: Using ST_GeogFromText() to create spatial objects
+-- Listing 14.5 (Using ST_GeogFromText() to create spatial objects)
 
 SELECT
 ST_GeogFromText('SRID=4326;MULTIPOINT(-74.9 42.7, -75.1 42.7, -74.924 42.6)');
 
--- Listing 14-6: Functions specific to making points
+-- Listing 14.6 (Functions specific to making points)
 
 SELECT ST_PointFromText('POINT(-74.9233606 42.699992)', 4326);
 
 SELECT ST_MakePoint(-74.9233606, 42.699992);
 SELECT ST_SetSRID(ST_MakePoint(-74.9233606, 42.699992), 4326);
 
--- Listing 14-7: Functions specific to making LineStrings
+-- Listing 14.7 (Functions specific to making LineStrings)
 
 SELECT ST_LineFromText('LINESTRING(-105.90 35.67,-105.91 35.67)', 4326);
 SELECT ST_MakeLine(ST_MakePoint(-74.92, 42.69), ST_MakePoint(-74.12, 42.45));
 
--- Listing 14-8: Functions specific to making Polygons
+-- Listing 14.8 (Functions specific to making Polygons)
 
 SELECT ST_PolygonFromText('POLYGON((-74.9 42.7, -75.1 42.7,
                                     -75.1 42.6, -74.9 42.7))', 4326);
@@ -70,12 +70,6 @@ SELECT ST_MPolyFromText('MULTIPOLYGON((
                                         -74.98 42.64, -74.98 42.66,
                                         -75.0 42.66)
                                       ))', 4326);
-
-
--- ANALYZING FARMERS MARKETS DATA
--- https://catalog.data.gov/dataset/farmers-markets-geographic-data
--- https://www.ams.usda.gov/local-food-directories/farmersmarkets
-
 
 -- Listing 14.9 (Create and load the farmers_markets table)
 
