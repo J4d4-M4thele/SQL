@@ -43,7 +43,8 @@ SELECT
 ST_GeogFromText('SRID=4326;MULTIPOINT(-74.9 42.7, -75.1 42.7, -74.924 42.6)');
 
 -- Listing 14.6 (Functions specific to making points)
-
+--ST_LineFromText(WKT, SRID)
+--ST_MakePoint(x, y, z(altitude), m(eg. time))
 SELECT ST_PointFromText('POINT(-74.9233606 42.699992)', 4326);
 
 SELECT ST_MakePoint(-74.9233606, 42.699992);
