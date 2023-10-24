@@ -320,6 +320,7 @@ SELECT president,
                to_tsquery('war & security & threat & enemy'), 2)::numeric 
                AS score
 FROM president_speeches
+--to_tsquery allows us to filter text according to the search terms
 WHERE search_speech_text @@ to_tsquery('war & security & threat & enemy')
 ORDER BY score DESC
 LIMIT 5;
